@@ -12,7 +12,7 @@ class Color{
     this.alpha = alpha;
   }
 }
-Color.createImage = (newColors,newFile)=>{
+Color.createImage = (newColors,outputFile)=>{
   fs.readFile(filePath,(err,buffer)=>{
     if(err) throw err;
     // const Bitmap = require('./bitmap');
@@ -22,7 +22,7 @@ Color.createImage = (newColors,newFile)=>{
     let numColors = originalBuffer.readInt32LE(46);
     let COLOR_TABLE_SIZE = numColors * 4;
     originalBuffer.write(newColors, COLOR_TABLE_OFFSET, COLOR_TABLE_SIZE, 'hex');
-    fs.writeFile(newFile,originalBuffer,(err)=>{
+    fs.writeFile(outputFile,originalBuffer,(err)=>{
       if(err) throw err;
     });
     return newColors;
